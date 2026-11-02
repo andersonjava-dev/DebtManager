@@ -16,4 +16,6 @@ public class PagamentoDTO {
     private Long id;
     private BigDecimal valor;
     private LocalDateTime dataPagamento;
+
+
 }
