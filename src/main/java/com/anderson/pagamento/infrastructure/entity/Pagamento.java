@@ -1,9 +1,7 @@
 package com.anderson.pagamento.infrastructure.entity;
 
-import com.anderson.pagamento.infrastructure.enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -23,6 +21,11 @@ public class Pagamento {
     private BigDecimal valor;
     @Column(name = "dataPagamento", nullable = false)
     private LocalDateTime dataPagamento;
+
+
+    @ManyToOne
+    @JoinColumn(name = "divida_id")
+    private Divida divida;
 
 
 }
