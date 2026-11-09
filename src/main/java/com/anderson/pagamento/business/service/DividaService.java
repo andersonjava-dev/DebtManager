@@ -1,7 +1,6 @@
 package com.anderson.pagamento.business.service;
 
 import com.anderson.pagamento.business.converter.DividaConverter;
-import com.anderson.pagamento.business.dtos.ClienteDTO;
 import com.anderson.pagamento.business.dtos.DividaDTO;
 import com.anderson.pagamento.infrastructure.entity.Cliente;
 import com.anderson.pagamento.infrastructure.entity.Divida;
@@ -32,7 +31,6 @@ public class DividaService {
         Divida entity = dividaConverter.paraDividaEntity(dto);
         entity.setCliente(cliente);
         entity.setStatus(Status.PENDENTE);
-        entity.setSaldoRestante(dto.getSaldoRestante());
         entity.setDataDaCompra(LocalDateTime.now());
 
         return dividaConverter.paraDividaDTO(dividaRepository.save(entity));
@@ -81,6 +79,8 @@ public class DividaService {
                 -> new ResourceNotFoundException("Dívida não encontrada, id inválido " + id));
 
         Divida entit = dividaConverter.updateDivida(dto, entity);
+        entit.setCliente(entity.getCliente());
+
         return dividaConverter.paraDividaDTO(dividaRepository.save(entit));
     }
     public void deletarDivida(Long id){

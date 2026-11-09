@@ -1,7 +1,6 @@
 package com.anderson.pagamento.business.service;
 
 import com.anderson.pagamento.business.converter.ClienteConverter;
-import com.anderson.pagamento.business.converter.DividaConverter;
 import com.anderson.pagamento.business.converter.PagamentoConverter;
 import com.anderson.pagamento.business.dtos.ClienteDTO;
 import com.anderson.pagamento.business.dtos.PagamentoDTO;

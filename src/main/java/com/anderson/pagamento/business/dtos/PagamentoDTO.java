@@ -1,6 +1,5 @@
 package com.anderson.pagamento.business.dtos;
 
-import jakarta.persistence.Column;
 import lombok.*;
 
 import java.math.BigDecimal;

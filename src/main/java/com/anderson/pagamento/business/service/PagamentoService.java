@@ -9,13 +9,12 @@ import com.anderson.pagamento.infrastructure.exception.ResourceNotFoundException
 import com.anderson.pagamento.infrastructure.repository.DividaRepository;
 import com.anderson.pagamento.infrastructure.repository.PagamentoRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Slf4j
+
 @Service
 @RequiredArgsConstructor
 public class PagamentoService {
@@ -24,7 +23,7 @@ public class PagamentoService {
     private final PagamentoConverter pagamentoConverter;
     private final DividaRepository dividaRepository;
 
-    public PagamentoDTO registrarPagamento(BigDecimal valorPagamento,  Long id) {
+    public PagamentoDTO registrarPagamento(BigDecimal valorPagamento, Long id) {
 
         Divida divida = dividaRepository.findById(id).orElseThrow(()
         -> new ResourceNotFoundException("Divida não encontrada, id invalido: "+ id));

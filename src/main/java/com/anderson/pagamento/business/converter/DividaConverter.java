@@ -16,29 +16,26 @@ public class DividaConverter {
                 .valorTotal(entity.getValorTotal())
                 .saldoRestante(entity.getSaldoRestante())
                 .status(entity.getStatus())
+
                 .build();
     }
 
     public Divida paraDividaEntity(DividaDTO dto) {
         return Divida.builder()
-                .id(dto.getId())
-                .dataDaCompra(dto.getDataDaCompra())
                 .descricaoDaCompra(dto.getDescricaoDaCompra())
                 .saldoRestante(dto.getSaldoRestante())
-                .status(dto.getStatus())
                 .valorTotal(dto.getValorTotal())
                 .build();
     }
 
     public Divida updateDivida(DividaDTO dto, Divida entity) {
         return Divida.builder()
-
-                .id(entity.getId())
+                .id(entity.getId() != null ? entity.getId() : dto.getId())
                 .dataDaCompra(dto.getDataDaCompra() != null ? dto.getDataDaCompra() : entity.getDataDaCompra())
+                .status(dto.getStatus() != null ? dto.getStatus() : entity.getStatus())
                 .descricaoDaCompra(dto.getDescricaoDaCompra() != null ? dto.getDescricaoDaCompra() : entity.getDescricaoDaCompra())
                 .valorTotal(dto.getValorTotal() != null ? dto.getValorTotal() : entity.getValorTotal())
                 .saldoRestante(dto.getSaldoRestante() != null ? dto.getSaldoRestante() : entity.getSaldoRestante())
-                .status(dto.getStatus() != null ? dto.getStatus() : entity.getStatus())
                 .build();
     }
 }

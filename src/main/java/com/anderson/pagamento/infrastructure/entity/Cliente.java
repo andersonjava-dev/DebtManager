@@ -20,7 +20,7 @@ public class Cliente {
     private Long id;
     @Column(name = "nome", length = 20)
     private String nome;
-    @Column(name = "telefone", length = 10, unique = true)
+    @Column(name = "telefone", length = 15, unique = true)
     private String telefone;
     @Column(name = "data_cadastro")
     private LocalDateTime data_cadastro;

@@ -8,8 +8,6 @@ import com.anderson.pagamento.business.dtos.DividaDTO;
 import com.anderson.pagamento.business.dtos.PagamentoDTO;
 import com.anderson.pagamento.business.dtos.ResumoFinanceiroDTO;
 import com.anderson.pagamento.infrastructure.entity.Cliente;
-import com.anderson.pagamento.infrastructure.entity.Divida;
-import com.anderson.pagamento.infrastructure.entity.Pagamento;
 import com.anderson.pagamento.infrastructure.exception.ResourceNotFoundException;
 import com.anderson.pagamento.infrastructure.repository.ClienteRepository;
 import com.anderson.pagamento.infrastructure.repository.DividaRepository;
@@ -34,8 +32,6 @@ public class ClienteService {
     public ClienteDTO cadastrarCliente(ClienteDTO dto) {
 
         Cliente entity = clienteConverter.paraClienteEntity(dto);
-        dto.getNome();
-        dto.getTelefone();
         entity.setData_cadastro(LocalDateTime.now());
         return clienteConverter.paraClienteDTO(clienteRepository.save(entity));
 
@@ -76,15 +72,24 @@ public class ClienteService {
         clienteRepository.deleteById(id);
     }
 
-    public ResumoFinanceiroDTO buscarHistoricoFinanceiro() {
-        List<PagamentoDTO> pagamentos = pagamentoRepository.findAll()
-                .stream()
-                .map(pagamentoConverter::paraPagamentoDTO)
-                .toList();
-        List<DividaDTO> dividas = dividaRepository.findAll()
+    public ResumoFinanceiroDTO buscarHistoricoFinanceiro(Long id) {
+
+        Cliente cliente = clienteRepository.findById(id).orElseThrow(()
+        -> new ResourceNotFoundException("Cliente não encontrado, id inválido "+ id));
+
+
+        List<DividaDTO> dividas = cliente.getDividas()
                 .stream()
                 .map(dividaConverter::paraDividaDTO)
                 .toList();
+
+        List<PagamentoDTO> pagamentos = cliente.getDividas()
+                .stream()
+                .flatMap(divida -> divida.getPagamentos().stream())
+                .map(pagamentoConverter::paraPagamentoDTO)
+                .toList();
+
+
         return new ResumoFinanceiroDTO(dividas, pagamentos);
 
     }

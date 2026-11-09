@@ -1,7 +1,6 @@
 package com.anderson.pagamento.business.dtos;
 
 import com.anderson.pagamento.infrastructure.enums.Status;
-import jakarta.persistence.Column;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -21,4 +20,7 @@ public class DividaDTO {
     private BigDecimal saldoRestante;
     private LocalDateTime dataDaCompra;
     private Status status;
+
+
 }
+

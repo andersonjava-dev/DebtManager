@@ -31,7 +31,8 @@ public class ClienteConverter {
                 .id(entity.getId())
                 .nome(dto.getNome() != null ? dto.getNome() : entity.getNome())
                 .telefone(dto.getTelefone() != null ? dto.getTelefone() : entity.getTelefone())
-                .data_cadastro(dto.getData_cadastro() != null ? dto.getData_cadastro() : entity.getData_cadastro())
+                .data_cadastro(entity.getData_cadastro())
+
                 .build();
     }
 }
